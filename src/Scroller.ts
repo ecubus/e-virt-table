@@ -340,6 +340,10 @@ export default class Scroller {
     }
 
     onMouseMove(e: MouseEvent) {
+        if(e.buttons==0){
+            this.onMouseUp();
+            return;
+        }
         this.verticalScrollbar.onMouseMove(e);
         this.horizontalScrollbar.onMouseMove(e);
         this.draw(true);
@@ -363,6 +367,9 @@ export default class Scroller {
                 this.ctx.emit('onScrollX', scrollX, isTrust);
             }
             if (scrollY !== this.ctx.scrollY) {
+                if(isTrust){
+                    console.log('xxx')
+                }
                 this.ctx.emit('onScrollY', scrollY, isTrust);
             }
             this.ctx.scrollX = scrollX;
